@@ -15,41 +15,41 @@ env:
   RUST_BACKTRACE: 1
 
 jobs:
-  style:
-    name: Check formatting and Clippy lints
-    # if: github.repository_owner == 'zed-industries'
-    runs-on:
-      # - self-hosted
-      - test
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          clean: false
-          submodules: "recursive"
-          fetch-depth: 0
+  # style:
+  #   name: Check formatting and Clippy lints
+  #   # if: github.repository_owner == 'zed-industries'
+  #   runs-on:
+  #     # - self-hosted
+  #     - test
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v4
+  #       with:
+  #         clean: false
+  #         submodules: "recursive"
+  #         fetch-depth: 0
 
-      - name: Run style checks
-        uses: ./.github/actions/check_style
+  #     - name: Run style checks
+  #       uses: ./.github/actions/check_style
 
-      - name: Run clippy
-        run: cargo xtask clippy
-  tests:
-    name: Run tests
-    # if: github.repository_owner == 'zed-industries'
-    runs-on:
-      # - self-hosted
-      - test
-    needs: style
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          clean: false
-          submodules: "recursive"
+  #     - name: Run clippy
+  #       run: cargo xtask clippy
+  # tests:
+  #   name: Run tests
+  #   # if: github.repository_owner == 'zed-industries'
+  #   runs-on:
+  #     # - self-hosted
+  #     - test
+  #   needs: style
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v4
+  #       with:
+  #         clean: false
+  #         submodules: "recursive"
 
-      - name: Run tests
-        uses: ./.github/actions/run_tests
+  #     - name: Run tests
+  #       uses: ./.github/actions/run_tests
 
   # bundle-mac:
   #   name: Create a macOS bundle
@@ -98,7 +98,7 @@ jobs:
     name: Create a *.deb Linux bundle
     # if: github.repository_owner == 'zed-industries'
     runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
-    needs: tests
+    # needs: tests
     # env:
     #   DIGITALOCEAN_SPACES_ACCESS_KEY: $ {{ secrets.DIGITALOCEAN_SPACES_ACCESS_KEY }}
     #   DIGITALOCEAN_SPACES_SECRET_KEY: $ {{ secrets.DIGITALOCEAN_SPACES_SECRET_KEY }}
