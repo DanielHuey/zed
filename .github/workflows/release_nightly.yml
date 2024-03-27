@@ -23,7 +23,7 @@ jobs:
       shell: |
         bash -euxo pipefail {0}
       run: |
-        git --version
+        /usr/bin/git --version
         script/linux
     - name: Set release channel to nightly
       run: |
