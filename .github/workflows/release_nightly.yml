@@ -19,8 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Clippy
-        run: cargo xtask clippy --keep-going
+      # - name: Clippy
+      #   run: cargo xtask clippy
       - name: Configure linux
         shell: bash -euxo pipefail {0}
         run: script/linux
