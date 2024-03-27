@@ -20,8 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Configure linux
-      shell: |
-        bash -euxo pipefail {0}
+      shell: bash -euxo pipefail {0}
       run: script/linux
     - name: Set release channel to nightly
       run: |
