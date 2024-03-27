@@ -21,6 +21,11 @@ jobs:
         uses: actions/checkout@v4
       # - name: Clippy
       #   run: cargo xtask clippy
+  bundle-deb:
+    name: Create & Upload Linux Executable
+    runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
+    needs: setup
+    steps:
       - name: Configure linux
         shell: bash -euxo pipefail {0}
         run: script/linux
@@ -31,11 +36,6 @@ jobs:
           version=$(git rev-parse --short HEAD)
           echo "Publishing version: ${version} on release channel nightly"
           echo "nightly" > crates/zed/RELEASE_CHANNEL
-  bundle-deb:
-    name: Create & Upload Linux Executable
-    runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
-    needs: setup
-    steps:
       - name: Build
         run: cargo build --release --keep-going
       - name: Upload Artifact
