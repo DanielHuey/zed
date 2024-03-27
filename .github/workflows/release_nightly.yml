@@ -13,9 +13,9 @@ env:
   RUST_BACKTRACE: 1
 
 jobs:
-  bundle-deb:
-    name: Create a Linux Executable
-    runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
+  setup:
+    name: Initialize
+    runs-on: test
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,8 +31,13 @@ jobs:
           version=$(git rev-parse --short HEAD)
           echo "Publishing version: ${version} on release channel nightly"
           echo "nightly" > crates/zed/RELEASE_CHANNEL
+  bundle-deb:
+    name: Create & Upload Linux Executable
+    runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
+    needs: setup
+    steps:
       - name: Build
-        run: cargo build --release --keep-going --verbose
+        run: cargo build --release --keep-going
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
