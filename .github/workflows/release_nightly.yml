@@ -22,11 +22,10 @@ jobs:
     - name: Configure linux
       shell: |
         bash -euxo pipefail {0}
+      run: |
         echo $(lscpu)
         git --version
-      run: |
         script/linux
-        git submodule update --init --recursive
     - name: Set release channel to nightly
       run: |
         set -euo pipefail
