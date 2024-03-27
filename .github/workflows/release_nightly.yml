@@ -5,6 +5,7 @@ on:
     # Fire every day at 7:00am UTC (Roughly before EU workday and after US workday)
     - cron: "0 7 * * *"
   workflow_dispatch:
+  push:
 
 env:
   CARGO_TERM_COLOR: always
@@ -19,7 +20,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Clippy
-        run: cargo xtask clippy
+        run: cargo xtask clippy --keep-going
       - name: Configure linux
         shell: bash -euxo pipefail {0}
         run: script/linux
