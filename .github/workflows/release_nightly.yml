@@ -19,7 +19,7 @@ jobs:
     name: Check formatting and Clippy lints
     # if: github.repository_owner == 'zed-industries'
     runs-on:
-      - self-hosted
+      # - self-hosted
       - test
     steps:
       - name: Checkout repo
@@ -38,7 +38,7 @@ jobs:
     name: Run tests
     # if: github.repository_owner == 'zed-industries'
     runs-on:
-      - self-hosted
+      # - self-hosted
       - test
     needs: style
     steps:
