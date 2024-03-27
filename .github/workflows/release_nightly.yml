@@ -16,10 +16,24 @@ jobs:
     name: Create a Linux Executable
     runs-on: ubuntu-22.04 # keep the version fixed to avoid libc and dynamic linked library issues
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Clippy
+        run: cargo xtask clippy
+      - name: Configure linux
+        shell: bash -euxo pipefail {0}
+        run: script/linux
+
+      - name: Set release channel to nightly
+        run: |
+          set -euo pipefail
+          version=$(git rev-parse --short HEAD)
+          echo "Publishing version: ${version} on release channel nightly"
+          echo "nightly" > crates/zed/RELEASE_CHANNEL
       - name: Build
         run: cargo build --release --keep-going --verbose
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: zed-linux
-          path: /
+          path: /home/runner/work/zed/zed
