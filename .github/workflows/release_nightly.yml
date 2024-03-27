@@ -22,9 +22,7 @@ jobs:
     - name: Configure linux
       shell: |
         bash -euxo pipefail {0}
-      run: |
-        /usr/bin/git --version
-        script/linux
+      run: script/linux
     - name: Set release channel to nightly
       run: |
         set -euo pipefail
