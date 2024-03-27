@@ -15,7 +15,7 @@ env:
 jobs:
   setup:
     name: Initialize
-    runs-on: test
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
