@@ -29,7 +29,7 @@ jobs:
         echo "Publishing version: ${version} on release channel nightly"
         echo "nightly" > crates/zed/RELEASE_CHANNEL
     - name: Build
-      run: cargo build --release --keep-going --package zed --package cli
+      run: cargo build --release --package zed --package cli
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
